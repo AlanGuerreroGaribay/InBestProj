@@ -1,0 +1,14 @@
+@use '../base/colors';
+
+.input {
+    all: unset;
+    font-size: large;
+    padding: 7.5px 0px;
+    margin: 5px 0px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+
+    color: colors.$primary;
+    background-color: colors.$primary-content;
+}

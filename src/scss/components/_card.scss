@@ -1,0 +1,37 @@
+@use '../helpers/mixins';
+@use '../base/colors';
+
+.cards-container {
+    display: grid;
+    gap: 10px;
+
+    // Estilos de cada tarjeta
+    .card {
+        @include mixins.flex-center-column;
+        background-color: colors.$primary;
+        color: colors.$primary-content;
+        padding: 5px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+        opacity: 0.6;
+    }
+
+    .card:active {
+        opacity: 0.3;
+    }
+
+    // Media queries para la distribución de las tarjetas
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr); // 3 columnas en pantallas grandes
+        grid-template-rows: repeat(3, auto); // 3 filas en pantallas grandes
+    }
+
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr; // 1 columna en pantallas pequeñas
+        grid-template-rows: auto;
+    }
+}

@@ -1,0 +1,24 @@
+@use '../base/colors';
+
+.button {
+    all: unset;
+    font-size: large;
+    padding: 7.5px 0px;
+    margin: 5px 0px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+
+    &.primary {
+        color: colors.$primary-content;
+        background-color: colors.$primary;
+    }
+}
+
+.button:hover {
+    opacity: 0.6;
+}
+
+.button:active {
+    opacity: 0.3;
+}

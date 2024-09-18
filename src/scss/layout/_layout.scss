@@ -1,0 +1,21 @@
+@use "../helpers/mixins";
+@use "../base/colors";
+
+.layout_page {
+    @include mixins.span-cont;
+    color: colors.$base-content;
+    display: grid;
+    grid-template:
+        "header" 5vh
+        "body" 95vh/ auto;
+
+    .layout__header_container {
+        grid-area: header;
+        background-color: colors.$primary;
+    }
+
+    .layout__body_container {
+        grid-area: body;
+    }
+
+}
