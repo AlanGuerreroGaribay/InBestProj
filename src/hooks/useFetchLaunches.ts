@@ -6,8 +6,9 @@ import {
 import { fetchLaunchesData } from "@/utils/handlers/fetchLunchesData";
 
 export const useFetchLaunches = (limit: number) => {
-  const [launchesData, setDataLaunches] = useState<LaunchDataType[]>([]);
+  const [launchesData, setLaunchesData] = useState<LaunchDataType[]>([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const params: GetDataLaunchesProps = {
     data: {
       options: {
@@ -22,19 +23,19 @@ export const useFetchLaunches = (limit: number) => {
     const filteredData = await fetchLaunchesData(data);
 
     localStorage.setItem("myLauchesData", JSON.stringify(filteredData));
-    setDataLaunches(filteredData);
 
-    return;
+    setLaunchesData(filteredData);
   };
 
   useEffect(() => {
     const storedLaunches = localStorage.getItem("myLauchesData");
 
-    if (launchesData.length === 0) {
-      setDataLaunches(JSON.parse(storedLaunches ? storedLaunches : ""));
-    } else {
+    if (storedLaunches) {
       launches(params);
+    } else {
+      setLaunchesData(JSON.parse(storedLaunches ?? ""));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [launchesData.length, params.data.options.limit]);
 
   return launchesData;

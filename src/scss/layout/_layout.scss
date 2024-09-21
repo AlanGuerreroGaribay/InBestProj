@@ -5,17 +5,25 @@
     @include mixins.span-cont;
     color: colors.$base-content;
     display: grid;
-    grid-template:
-        "header" 5vh
-        "body" 95vh/ auto;
+    grid-template-rows: 60px auto;
+    overflow: hidden;
+}
 
-    .layout__header_container {
-        grid-area: header;
-        background-color: colors.$primary;
+.layout_body {
+    display: grid;
+    height: 1000px;
+    grid-template-columns: 0% 100%;
+    transition: visibility 0.4s ease, grid-template-columns 0.4s ease;
+
+    &.show {
+        visibility: visible;
+        display: grid;
+        grid-template-columns: 350px auto;
     }
 
-    .layout__body_container {
-        grid-area: body;
+    &.hide {
+        visibility: hidden;
+        grid-template-columns: 0% 100%;
     }
 
 }

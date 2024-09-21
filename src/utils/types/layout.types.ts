@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { LaunchDataType } from "./types/launchData.types";
+import { LaunchDataType } from "./launchData.types";
 
 export type CompProps = {
   modal?: string;

@@ -4,6 +4,9 @@
 .cards-container {
     display: grid;
     gap: 10px;
+    height: 90%;
+    padding: 30px;
+    overflow-y: auto;
 
     // Estilos de cada tarjeta
     .card {
@@ -13,7 +16,6 @@
         padding: 5px;
         text-align: center;
         border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .card:hover {
@@ -34,4 +36,10 @@
         grid-template-columns: 1fr; // 1 columna en pantallas pequeñas
         grid-template-rows: auto;
     }
+}
+
+.card-see-more {
+    display: flex;
+    align-items: center;
+
 }

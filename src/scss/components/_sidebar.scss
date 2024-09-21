@@ -4,13 +4,12 @@
 .sidebar-container {
     height: 100%;
     padding: 20px;
-    position: fixed;
     color: colors.$accent;
     background-color: colors.$base;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: visibility 0.4s ease, width 0.5s ease;
+    transition: visibility 0.4s ease, width 0.4s ease, height 0.4 ease;
 
     .button-area {
         gap: 10px;
@@ -25,7 +24,9 @@
     }
 
     &.hide {
+        padding: 0px;
         width: 0%;
+        height: 0%;
         visibility: hidden
     }
 

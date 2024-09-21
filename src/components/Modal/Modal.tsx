@@ -10,10 +10,9 @@ export const Modal = ({ children, modal }: CompProps) => {
   );
 };
 
-export const ModalFooter = ({ handler, close }: CompPropsMouseHandler) => {
+export const ModalFooter = ({ close }: CompPropsMouseHandler) => {
   return (
     <div className="modal-footer">
-      <Button text="Ver más" handler={handler} />
       <Button text="Salir" handler={close} />
     </div>
   );
