@@ -4,6 +4,7 @@ import {
   LaunchDataType,
 } from "@/utils/types/launchData.types";
 import { fetchLaunchesData } from "@/utils/handlers/fetchLunchesData";
+import { fetchLaunchPadCoordenatesHandler } from "@/utils/handlers/fetchLaunchPadData";
 
 export const useFetchLaunches = (limit: number) => {
   const [launchesData, setLaunchesData] = useState<LaunchDataType[]>([]);
@@ -19,12 +20,21 @@ export const useFetchLaunches = (limit: number) => {
     },
   };
 
+  //traigo la data de todos los lanzamientos
   const launches = async (data: GetDataLaunchesProps) => {
-    const filteredData = await fetchLaunchesData(data);
+    const filteredDataLaunches = await fetchLaunchesData(data);
 
-    localStorage.setItem("myLauchesData", JSON.stringify(filteredData));
+    const filteredDataLaunchPads = await Promise.all(
+      launchesData.map((launch) => {
+        return fetchLaunchPadCoordenatesHandler(launch.launchpad);
+      })
+    );
 
-    setLaunchesData(filteredData);
+    console.log(filteredDataLaunchPads);
+
+    localStorage.setItem("myLauchesData", JSON.stringify(filteredDataLaunches));
+
+    setLaunchesData(filteredDataLaunches);
   };
 
   useEffect(() => {

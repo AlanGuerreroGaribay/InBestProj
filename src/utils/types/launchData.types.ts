@@ -3,6 +3,7 @@ export type GetDataLaunchesProps = {
 };
 
 export type LaunchDataType = {
+  id: string;
   name: string;
   rocket: string;
   success: boolean;

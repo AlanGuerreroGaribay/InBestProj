@@ -7,27 +7,38 @@ import { useState } from "react";
 import Button from "@/components/Buttons/Button";
 import Input from "@/components/Inputs/Input";
 import MainPageView from "@/views/MainPageView";
+import ModalShowAllLaunches from "@/views/ModalShowAllLaunches";
+import { useFetchLaunches } from "@/hooks/useFetchLaunches";
 
 function App() {
   const [showSideBar, setShowSideBar] = useState<boolean>(true);
-  // const [modal, setModal] = useState<string>("");
+  const [latitude, setLatitude] = useState<number>(9.0477206);
+  const [longitude, setLongitude] = useState<number>(167.7431292);
+  const [launchId, setLaunchId] = useState<string>("");
+  const [modal, setModal] = useState<boolean>(false);
+  const [launchesNumber, setLaunchesNumber] = useState<number>(9);
 
-  // const closeModal = () => {
-  //   setModal("hide");
-  // };
+  const launches = useFetchLaunches(launchesNumber);
 
-  //handler para mostrar mas
-  // const loadMoreLaunches = () => {
-  //   setLaunchesNumber(launchesNumber + 9);
-  // };
+  const closeModal = () => {
+    setModal(false);
+    setLaunchId("");
+  };
 
   return (
     <>
+      <ModalShowAllLaunches
+        modal={modal}
+        launchId={launchId}
+        lon={longitude}
+        lat={latitude}
+        close={closeModal}
+      />
       <LayOut>
         <LayOutHeader
           show={!showSideBar}
           handler={() => setShowSideBar(!showSideBar)}
-        /> 
+        />
         <LayOutBody show={showSideBar}>
           <SideBarContainer show={showSideBar}>
             <SideBarButtonArea>
@@ -35,7 +46,7 @@ function App() {
               <Input placeHolder="Ingresa el año que quieras filtrar" />
             </SideBarButtonArea>
           </SideBarContainer>
-          <MainPageView />
+          <MainPageView launches={launches} />
         </LayOutBody>
       </LayOut>
     </>

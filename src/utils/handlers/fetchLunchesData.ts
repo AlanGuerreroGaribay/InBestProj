@@ -1,5 +1,8 @@
 import axios from "axios";
-import { GetDataLaunchesProps, LaunchDataType } from "../types/launchData.types";
+import {
+  GetDataLaunchesProps,
+  LaunchDataType,
+} from "../types/launchData.types";
 
 export const fetchLaunchesData = async ({ data }: GetDataLaunchesProps) => {
   const fetchedData = await axios.post(
@@ -8,7 +11,8 @@ export const fetchLaunchesData = async ({ data }: GetDataLaunchesProps) => {
   );
 
   const filteredData = await fetchedData.data.docs.map(
-    ({ name, rocket, success, date_local, launchpad }: LaunchDataType) => ({
+    ({ id, name, rocket, success, date_local, launchpad }: LaunchDataType) => ({
+      id,
       name,
       rocket,
       success,
