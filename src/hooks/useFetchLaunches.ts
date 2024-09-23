@@ -20,27 +20,44 @@ export const useFetchLaunches = (limit: number) => {
     },
   };
 
-  //traigo la data de todos los lanzamientos
+  //traigo la data relativa a los lanzamientos y sus plataformas de despegue
   const launches = async (data: GetDataLaunchesProps) => {
+    //traigo datos de lanzamientos
     const filteredDataLaunches = await fetchLaunchesData(data);
 
+    //traigo los datos de las plataformas para cada lanzamiento
     const filteredDataLaunchPads = await Promise.all(
-      launchesData.map((launch) => {
+      filteredDataLaunches.map((launch: LaunchDataType) => {
         return fetchLaunchPadCoordenatesHandler(launch.launchpad);
       })
     );
 
-    console.log(filteredDataLaunchPads);
+    //combino datos de plataformas y los lanzamientos
+    const combinedLaunchdata = await filteredDataLaunches.map(
+      (launch: LaunchDataType, i: number) => ({
+        ...launch,
+        coordinates: {
+          latitude: filteredDataLaunchPads[i]?.latitude,
+          longitude: filteredDataLaunchPads[i]?.longitude,
+        },
+      })
+    );
 
-    localStorage.setItem("myLauchesData", JSON.stringify(filteredDataLaunches));
+    //almaceno la data en el storage
+    localStorage.setItem("myLauchesData", JSON.stringify(combinedLaunchdata));
 
-    setLaunchesData(filteredDataLaunches);
+    console.log(combinedLaunchdata);
+    setLaunchesData(combinedLaunchdata);
   };
 
   useEffect(() => {
+    //uso la data del storage
     const storedLaunches = localStorage.getItem("myLauchesData");
 
-    if (storedLaunches) {
+    //valido que la data que acabo de llamar sea mayor a la del storage:
+    //1) de ser asi, hago otra llamada
+    //2) de lo contrario, uso la data del storage
+    if (launchesData) {
       launches(params);
     } else {
       setLaunchesData(JSON.parse(storedLaunches ?? ""));

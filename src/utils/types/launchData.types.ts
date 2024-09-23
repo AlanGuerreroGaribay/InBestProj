@@ -9,4 +9,14 @@ export type LaunchDataType = {
   success: boolean;
   date_local: string;
   launchpad: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+};
+
+export type LaunchPadType = {
+  launchpad: string;
+  longitude: number;
+  latitude: number;
 };

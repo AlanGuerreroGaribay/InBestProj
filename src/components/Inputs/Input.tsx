@@ -1,4 +1,10 @@
-const Input = ({ placeHolder, onchange }: any) => {
+const Input = ({
+  placeHolder,
+  onchange,
+}: {
+  placeHolder?: string;
+  onchange?: React.ChangeEventHandler<HTMLInputElement>;
+}) => {
   return (
     <input
       onChange={onchange}

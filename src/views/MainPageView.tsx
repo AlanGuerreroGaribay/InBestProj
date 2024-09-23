@@ -7,7 +7,15 @@ import { LaunchDataType } from "@/utils/types/launchData.types";
 
 import "@/scss/_main.scss";
 
-const MainPageView = ({ launches }: any) => {
+const MainPageView = ({ launches, handler, seeMore }: any) => {
+  const launchHandler = (id: string) => {
+    handler(id);
+  };
+
+  const handlerViews = () => {
+    seeMore();
+  };
+
   return (
     <div className="main-view">
       <CardsContainer>
@@ -19,11 +27,14 @@ const MainPageView = ({ launches }: any) => {
               rocket={launch.rocket}
               success={launch.success}
               date={launch.date_local}
+              handler={() => {
+                launchHandler(launch.id);
+              }}
             />
           );
         })}
       </CardsContainer>
-      <SeeMoreButton/>
+      <SeeMoreButton handler={handlerViews} />
     </div>
   );
 };

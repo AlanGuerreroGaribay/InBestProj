@@ -6,9 +6,11 @@ export const fetchLaunchPadCoordenatesHandler = async (launchpadId: string) => {
   );
 
   const coordantes = {
+    launchpad: coordantesData.data.id,
     longitude: coordantesData.data.longitude,
     latitude: coordantesData.data.latitude,
   };
+
 
   return coordantes;
 };

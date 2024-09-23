@@ -5,15 +5,14 @@ import {
 import { LayOut, LayOutBody, LayOutHeader } from "@/components/Layout/LayOut";
 import { useState } from "react";
 import Button from "@/components/Buttons/Button";
-import Input from "@/components/Inputs/Input";
 import MainPageView from "@/views/MainPageView";
 import ModalShowAllLaunches from "@/views/ModalShowAllLaunches";
 import { useFetchLaunches } from "@/hooks/useFetchLaunches";
+import { LaunchDataType } from "@/utils/types/launchData.types";
 
 function App() {
-  const [showSideBar, setShowSideBar] = useState<boolean>(true);
-  const [latitude, setLatitude] = useState<number>(9.0477206);
-  const [longitude, setLongitude] = useState<number>(167.7431292);
+  const [data, setData] = useState<LaunchDataType[]>([]);
+  const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const [launchId, setLaunchId] = useState<string>("");
   const [modal, setModal] = useState<boolean>(false);
   const [launchesNumber, setLaunchesNumber] = useState<number>(9);
@@ -25,13 +24,23 @@ function App() {
     setLaunchId("");
   };
 
+  const seeMoreHandler = () => {
+    setLaunchesNumber(launchesNumber + 9);
+  };
+
+  const launchHandler = (id: string) => {
+    setLaunchId(id);
+    const launchData = launches.filter((launch) => launch.id === id);
+    setData(launchData);
+    setModal(true);
+  };
+
   return (
     <>
       <ModalShowAllLaunches
         modal={modal}
+        modalData={data}
         launchId={launchId}
-        lon={longitude}
-        lat={latitude}
         close={closeModal}
       />
       <LayOut>
@@ -43,10 +52,13 @@ function App() {
           <SideBarContainer show={showSideBar}>
             <SideBarButtonArea>
               <Button text="Lanzamientos" />
-              <Input placeHolder="Ingresa el año que quieras filtrar" />
             </SideBarButtonArea>
           </SideBarContainer>
-          <MainPageView launches={launches} />
+          <MainPageView
+            seeMore={seeMoreHandler}
+            launches={launches}
+            handler={launchHandler}
+          />
         </LayOutBody>
       </LayOut>
     </>
