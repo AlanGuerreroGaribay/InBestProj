@@ -8,6 +8,8 @@ export type CompProps = {
 };
 
 export type CompPropsMouseHandler = CompProps & {
+  searchValue?: string;
+  search?: React.ChangeEventHandler<HTMLInputElement>;
   close?: React.MouseEventHandler<HTMLButtonElement>;
   handler?: React.MouseEventHandler<HTMLButtonElement>;
 };

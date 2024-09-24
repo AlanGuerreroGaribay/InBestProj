@@ -22,3 +22,33 @@
 .button:active {
     opacity: 0.3;
 }
+
+.button_rounded {
+    all: unset;
+    height: 40px;
+    width: 40px;
+    margin: 0px 20px;
+    border-radius: 50px;
+    background-color: colors.$primary;
+}
+
+@media (max-width: 768px) {
+    .button {
+        all: unset;
+        padding: 5px 0px;
+        margin: 5px 0px;
+        border-radius: 5px;
+        text-align: center;
+        width: 100%;
+
+        &.primary {
+            color: colors.$primary-content;
+            background-color: colors.$primary;
+        }
+    }
+
+    .button_rounded {
+        height: 25px;
+        width: 25px;
+    }
+}

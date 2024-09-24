@@ -5,6 +5,7 @@ import {
 } from "@/utils/types/launchData.types";
 import { fetchLaunchesData } from "@/utils/handlers/fetchLunchesData";
 import { fetchLaunchPadCoordenatesHandler } from "@/utils/handlers/fetchLaunchPadData";
+import { fetchRocketData } from "@/utils/handlers/fetchRocketData";
 
 export const useFetchLaunches = (limit: number) => {
   const [launchesData, setLaunchesData] = useState<LaunchDataType[]>([]);
@@ -32,6 +33,13 @@ export const useFetchLaunches = (limit: number) => {
       })
     );
 
+    //traigo los datos de los cohetes de cada misión
+    const filteredDataRockets = await Promise.all(
+      filteredDataLaunches.map((launch: LaunchDataType) => {
+        return fetchRocketData(launch.rocket);
+      })
+    );
+
     //combino datos de plataformas y los lanzamientos
     const combinedLaunchdata = await filteredDataLaunches.map(
       (launch: LaunchDataType, i: number) => ({
@@ -39,6 +47,12 @@ export const useFetchLaunches = (limit: number) => {
         coordinates: {
           latitude: filteredDataLaunchPads[i]?.latitude,
           longitude: filteredDataLaunchPads[i]?.longitude,
+        },
+        rocket: {
+          name: filteredDataRockets[i]?.name,
+          type: filteredDataRockets[i]?.type,
+          first_flight: filteredDataRockets[i]?.first_flight,
+          description: filteredDataRockets[i]?.description,
         },
       })
     );

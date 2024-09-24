@@ -11,13 +11,13 @@ export const fetchLaunchesData = async ({ data }: GetDataLaunchesProps) => {
   );
 
   const filteredData = await fetchedData.data.docs.map(
-    ({ id, name, rocket, success, date_local, launchpad }: LaunchDataType) => ({
-      id,
-      name,
-      rocket,
-      success,
-      date_local,
-      launchpad,
+    (launch: LaunchDataType) => ({
+      id: launch.id,
+      name: launch.name,
+      rocket: launch.rocket,
+      success: launch.success ? "Mision exitosa" : "Mision fallida",
+      date_local: launch.date_local,
+      launchpad: launch.launchpad,
     })
   );
 

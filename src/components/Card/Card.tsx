@@ -20,11 +20,33 @@ export const CardItem = ({
   handler?: React.MouseEventHandler<HTMLDivElement>;
 }) => {
   return (
-    <div className="card" onClick={handler}>
+    <div className="card-item" onClick={handler}>
       <h3>{name}</h3>
-      <span>Cohete: {rocket}</span>
-      <span>{success ? "Misión exitosa" : "Misión fallida"}</span>
-      <span>Fecha de lanzamineto: {date}</span>
+      <span>Cohete:</span>
+      <span>{rocket}</span>
+      <span>{success}</span>
+      <span>Fecha de lanzamineto:</span>
+      <span>{date}</span>
+    </div>
+  );
+};
+
+export const Card = ({
+  name,
+  date,
+  handler,
+}: {
+  name?: string;
+  rocket?: string;
+  success?: boolean;
+  date?: string;
+  handler?: React.MouseEventHandler<HTMLDivElement>;
+}) => {
+  return (
+    <div className="card" onClick={handler}>
+      <h3>{name?.substring(0, 13)}</h3>
+      <span>Fecha de lanzamineto:</span>
+      <span>{date}</span>
     </div>
   );
 };

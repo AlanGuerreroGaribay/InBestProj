@@ -50,3 +50,13 @@
         transform: translateY(0);
     }
 }
+
+@media (max-width: 768px) {
+    .modal {
+        &-content {
+            height: 90%;
+            width: 90%;
+            padding: 10px;
+        }
+    }
+}

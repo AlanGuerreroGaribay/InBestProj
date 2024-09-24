@@ -5,8 +5,10 @@ export type GetDataLaunchesProps = {
 export type LaunchDataType = {
   id: string;
   name: string;
-  rocket: string;
-  success: boolean;
+  rocket: {
+    name: string;
+  };
+  success: string;
   date_local: string;
   launchpad: string;
   coordinates: {

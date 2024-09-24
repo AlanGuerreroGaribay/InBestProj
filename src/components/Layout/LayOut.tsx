@@ -1,19 +1,18 @@
 import { CompProps, CompPropsMouseHandler } from "@/utils/types/layout.types";
-import Button from "../Buttons/Button";
+
 import Input from "../Inputs/Input";
 import "@/scss/_main.scss";
+import ButtonRounded from "../Buttons/ButtonRounded";
 
 export const LayOut = ({ children }: CompProps) => {
   return <div className="layout_page">{children}</div>;
 };
 
-export const LayOutHeader = ({ handler }: CompPropsMouseHandler) => {
+export const LayOutHeader = ({ searchValue, handler, search }: CompPropsMouseHandler) => {
   return (
     <div className="layout_header">
-      <div className="button">
-        <Button text="" handler={handler} />
-      </div>
-      <Input />
+      <ButtonRounded handler={handler} />
+      <Input value={searchValue} placeHolder="Search" onchange={search} />
     </div>
   );
 };

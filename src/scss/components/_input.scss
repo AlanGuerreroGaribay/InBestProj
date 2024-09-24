@@ -3,12 +3,20 @@
 .input {
     all: unset;
     font-size: large;
-    padding: 7.5px 0px;
+    padding: 7.5px;
     margin: 5px 0px;
     border-radius: 5px;
-    text-align: center;
-    width: 100%;
-
+    width: 250px;
     color: colors.$primary;
     background-color: colors.$primary-content;
+}
+
+@media (max-width: 768px) {
+    .input {
+        font-size: 13px;
+        padding: 5px;
+        margin: 5px 0px;
+        border-radius: 15px;
+        width: 140px;
+    }
 }

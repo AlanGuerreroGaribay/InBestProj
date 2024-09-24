@@ -11,13 +11,12 @@
 
 .layout_body {
     display: grid;
-    height: 1000px;
+    height: 95vh;
     grid-template-columns: 0% 100%;
     transition: visibility 0.4s ease, grid-template-columns 0.4s ease;
 
     &.show {
         visibility: visible;
-        display: grid;
         grid-template-columns: 350px auto;
     }
 
@@ -30,8 +29,23 @@
 
 .layout_header {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+}
 
+@media (max-width: 768px) {
+    .layout_body {
+        height: 93vh;
+
+        &.show {
+            visibility: visible;
+            grid-template-columns: 100% auto;
+        }
+
+        &.hide {
+            visibility: hidden;
+            grid-template-columns: 0% 100%;
+        }
+    }
 
 }
