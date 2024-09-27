@@ -6,8 +6,8 @@ import {
 } from "@/components/Card/Card";
 import { LaunchDataType } from "@/utils/types/launchData.types";
 import { useSetScreenSize } from "@/hooks/useSetScreensize";
-import "@/scss/_main.scss";
 import { List, ListItem } from "@/components/List/List";
+import "@/scss/_main.scss";
 
 const MainPageView = ({
   launches,
@@ -60,32 +60,29 @@ const MainPageView = ({
               );
             })}
           </CardsContainer>
-          <SeeMoreButton handler={handlerViews} />
         </div>
       )}
 
       {/* vista en telefono movil */}
       {screen.width <= 678 && (
-        <>
-          <List>
-            {launches?.map((launch: LaunchDataType, i: number) => {
-              return (
-                <ListItem key={`card-launches-list-${i}`}>
-                  <Card
-                    key={`card-launches-card-${i}`}
-                    name={launch.name}
-                    date={dateFormat(launch.date_local)}
-                    rocket={launch.rocket}
-                    handler={() => {
-                      launchHandler(launch.id);
-                    }}
-                  />
-                </ListItem>
-              );
-            })}
-            <SeeMoreButton handler={handlerViews} />
-          </List>
-        </>
+        <List>
+          {launches?.map((launch: LaunchDataType, i: number) => {
+            return (
+              <ListItem key={`card-launches-list-${i}`}>
+                <Card
+                  key={`card-launches-card-${i}`}
+                  name={launch.name}
+                  date={dateFormat(launch.date_local)}
+                  rocket={launch.rocket}
+                  handler={() => {
+                    launchHandler(launch.id);
+                  }}
+                />
+              </ListItem>
+            );
+          })}
+          <SeeMoreButton handler={handlerViews} />
+        </List>
       )}
     </>
   );

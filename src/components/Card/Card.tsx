@@ -15,7 +15,7 @@ export const CardItem = ({
 }: {
   name: string;
   rocket: string;
-  success: boolean;
+  success: string;
   date: string;
   handler?: React.MouseEventHandler<HTMLDivElement>;
 }) => {
@@ -37,7 +37,7 @@ export const Card = ({
   handler,
 }: {
   name?: string;
-  rocket?: string;
+  rocket?: { name: string };
   success?: boolean;
   date?: string;
   handler?: React.MouseEventHandler<HTMLDivElement>;
